@@ -19,9 +19,9 @@
     </li>
 
     <li class="nav-item active">
-        <a class="nav-link" href="{{ route('barang') }}">
+        <a class="nav-link" href="{{ route('event') }}">
             <i class="fas fa-fw fa-solid fa-box"></i>
-            <span>Barang</span></a>
+            <span>Event</span></a>
     </li>
 
     @if(auth()->user()->level == 'Admin')

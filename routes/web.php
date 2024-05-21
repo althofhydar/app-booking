@@ -39,23 +39,14 @@ Route::get('dashboard', function() {
     return view('dashboard');
 })->name('dashboard');
 
-route::controller(BarangController::class)->prefix('barang')->group(function() {
-    route::get('', 'index')->name('barang');
-    route::get('tambah', 'tambah')->name('barang.tambah');
-    route::post('tambah', 'simpan')->name('barang.tambah.simpan');
-    route::get('edit/{id}', 'edit')->name('barang.edit');
-    route::post('edit/{id}', 'update')->name('barang.tambah.update');
-    route::get('hapus/{id}', 'hapus')->name('barang.hapus');
-    
-});
 
- Route::controller(KategoriController::class)->prefix('kategori')->group(function() {
-     Route::get('', 'index')->name('kategori');
-     route::get('tambah', 'tambah')->name('kategori.tambah');
-     route::post('tambah', 'simpan')->name('kategori.tambah.simpan');
-     route::get('edit/{id}', 'edit')->name('kategori.edit');
-     route::post('edit/{id}', 'update')->name('kategori.tambah.update');
-     route::get('hapus/{id}', 'hapus')->name('kategori.hapus');
+ Route::controller(EventController::class)->prefix('event')->group(function() {
+     Route::get('', 'index')->name('event');
+     route::get('tambah', 'tambah')->name('event.tambah');
+     route::post('tambah', 'simpan')->name('event.tambah.simpan');
+     route::get('edit/{id}', 'edit')->name('event.edit');
+     route::post('edit/{id}', 'update')->name('event.tambah.update');
+     route::get('hapus/{id}', 'hapus')->name('event.hapus');
  });
 
 });
