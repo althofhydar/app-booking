@@ -5,7 +5,7 @@
         <div class="sidebar-brand-icon rotate-n-10">
             <i class="fas fa-dragon"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Tiketin</div>
+        <div class="sidebar-brand-text mx-3">Tiket.in</div>
     </a>
 
     <!-- Divider -->

@@ -59,6 +59,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                
                                 @php($no = 1)
                                 @foreach ($events as $row)
                                     <tr>
@@ -71,7 +72,7 @@
                                             <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEventModal{{ $row->id }}"><i class="fas fa-trash"></i> Hapus</button>
                                         </td>
                                     </tr>
-
+                                 
                                     <!-- Edit Event Modal -->
                                     <div class="modal fade" id="editEventModal{{ $row->id }}" tabindex="-1" role="dialog" aria-labelledby="editEventModalLabel{{ $row->id }}" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
@@ -104,7 +105,7 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    
                                     <!-- Delete Event Modal -->
                                     <div class="modal fade" id="deleteEventModal{{ $row->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteEventModalLabel{{ $row->id }}" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
@@ -135,7 +136,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Add Event Modal -->
             <div class="modal fade" id="addEventModal" tabindex="-1" role="dialog" aria-labelledby="addEventModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -146,6 +147,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+                        
                         <div class="modal-body">
                             <form action="{{ route('event.store') }}" method="POST">
                                 @csrf
@@ -164,33 +166,19 @@
                                 <button type="submit" class="btn btn-primary">Tambah Event</button>
                             </form>
                         </div>
+                        
                     </div>
                 </div>
             </div>
 
         </div>
+       
         <!-- /.container-fluid -->
-
     </div>
     <!-- /#wrapper -->
+    @endsection
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
-
+    
 </body>
 </html>
-@endsection
+
