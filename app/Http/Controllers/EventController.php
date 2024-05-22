@@ -2,49 +2,65 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\kategori;
+use App\Models\Event;
 use Illuminate\Http\Request;
 
-class KategoriController extends Controller
+class EventController extends Controller
 {
-    public function index() 
+    public function index()
     {
-        $kategori = kategori::get();
-
-        return view('kategori/index', ['kategori' => $kategori]);
+        $table['events'] = Event::all();
+        return view('event.index',$table);// Logika untuk menampilkan daftar event
     }
 
-    public function tambah()
+    public function update(Request $request, $id)
     {
-        return view('kategori.form');
+        $request->validate([
+            'event_name' => 'required',
+            'event_date' => 'required|date',
+            'location' => 'required',
+        ]);
+
+        $event = Event::findOrFail($id);
+        $event->update([
+            'event_name' => $request->event_name,
+            'event_date' => $request->event_date,
+            'location' => $request->location,
+        ]);
+
+        return redirect()->back()->with('success', 'Event updated successfully.');
     }
 
-    public function simpan(Request $request)
+    // Delete an existing event
+    public function destroy($id)
     {
-        kategori::create(['nama'=>$request->nama]);
+        $event = Event::findOrFail($id);
+        $event->delete();
 
-        return redirect()->route('kategori');
+        return redirect()->back()->with('success', 'Event deleted successfully.');
     }
 
-    public function edit($id)
+
+    // Fungsi untuk menyimpan event baru
+    public function store(Request $request)
     {
-        $kategori = kategori::find($id);
+        // Validasi data
+        $validatedData = $request->validate([
+            'event_name' => 'required|string|max:255',
+            'event_date' => 'required|date',
+            'location' => 'required|string|max:255',
+        ]);
 
-        return view('kategori.form', ['kategori' => $kategori]);
+        // Buat event baru
+        $event = new Event();
+        $event->event_name = $validatedData['event_name'];
+        $event->event_date = $validatedData['event_date'];
+        $event->location = $validatedData['location'];
+        $event->save();
+
+        // Redirect ke halaman event dengan pesan sukses
+        return redirect()->route('event.index')->with('success', 'Event berhasil ditambahkan.');
     }
-
-    public function update($id, Request $request)
-    {
-        kategori::find($id)->update(['nama'=>$request->nama]);
-
-        return redirect()->route('kategori');
-    }
-
-    public function hapus($id)
-    {
-        kategori::find($id)->delete();
-
-        return redirect()->route('kategori');
-    }
-
 }
+
+

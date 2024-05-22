@@ -5,16 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class kategori extends Model
+class Event extends Model
 {
     use HasFactory;
 
-    protected $table = 'kategori';
+    protected $table = 'events';
 
-    protected $fillable = ['nama'];
+    protected $fillable = ['event_name','event_date','location'];
 
-    public function barang()
-    {
-        return $this->hasMany(barang::class, 'id_kategori');
-    }
+   
 }

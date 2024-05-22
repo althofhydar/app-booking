@@ -5,7 +5,7 @@
         <div class="sidebar-brand-icon rotate-n-10">
             <i class="fas fa-dragon"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Toko ALL</div>
+        <div class="sidebar-brand-text mx-3">Tiketin</div>
     </a>
 
     <!-- Divider -->
@@ -19,7 +19,7 @@
     </li>
 
     <li class="nav-item active">
-        <a class="nav-link" href="{{ route('event') }}">
+        <a class="nav-link" href="{{ route('event.index') }}">
             <i class="fas fa-fw fa-solid fa-box"></i>
             <span>Event</span></a>
     </li>
