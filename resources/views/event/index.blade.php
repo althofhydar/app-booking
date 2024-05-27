@@ -55,6 +55,7 @@
                                     <th>Nama Event</th>
                                     <th>Jadwal Event</th>
                                     <th>Lokasi Event</th>
+                                    <th>Gambar</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -67,6 +68,11 @@
                                         <td>{{ $row->event_name }}</td>
                                         <td>{{ $row->event_date }}</td>
                                         <td>{{ $row->location }}</td>
+                                        <td>
+                                            @if ($row->image)
+                                                <img src="{{ asset('storage/' . $row->image) }}" alt="{{ $row->event_name }}" width="100">
+                                            @endif
+                                        </td>
                                         <td>
                                             <button class="btn btn-warning" data-toggle="modal" data-target="#editEventModal{{ $row->id }}"><i class="fas fa-pen-alt"></i> Edit</button>
                                             <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEventModal{{ $row->id }}"><i class="fas fa-trash"></i> Hapus</button>
@@ -84,7 +90,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="{{ route('event.update', $row->id) }}" method="POST">
+                                                    <form action="{{ route('event.update', $row->id) }}" method="POST" enctype="multipart/form-data">
                                                         @csrf
                                                         @method('PUT')
                                                         <div class="form-group">
@@ -99,8 +105,16 @@
                                                             <label for="location">Lokasi Event</label>
                                                             <input type="text" class="form-control" id="location" name="location" value="{{ $row->location }}" required>
                                                         </div>
+                                                        <div class="form-group">
+                                                            <label for="image">Gambar Event</label>
+                                                            <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                                                            @if ($row->image)
+                                                                <img src="{{ asset('storage/' . $row->image) }}" alt="{{ $row->event_name }}" width="100">
+                                                            @endif
+                                                        </div>
                                                         <button type="submit" class="btn btn-primary">Update Event</button>
                                                     </form>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -149,7 +163,7 @@
                         </div>
                         
                         <div class="modal-body">
-                            <form action="{{ route('event.store') }}" method="POST">
+                            <form action="{{ route('event.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label for="event_name">Nama Event</label>
@@ -163,8 +177,14 @@
                                     <label for="location">Lokasi Event</label>
                                     <input type="text" class="form-control" id="location" name="location" required>
                                 </div>
+                                <div class="form-group">
+                                    <label for="image">Gambar Event</label>
+                                    <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                                </div>
                                 <button type="submit" class="btn btn-primary">Tambah Event</button>
                             </form>
+                            
+                            
                         </div>
                         
                     </div>

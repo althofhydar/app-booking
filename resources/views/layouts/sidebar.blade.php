@@ -12,26 +12,48 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
+    @if(auth()->user()->level == 'admin')
     <li class="nav-item active">
         <a class="nav-link" href="{{ route('dashboard') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <i class="fa fa-th-large"></i>
             <span>Dashboard</span></a>
-    </li>
-
-    <li class="nav-item active">
-        <a class="nav-link" href="{{ route('event.index') }}">
-            <i class="fas fa-fw fa-solid fa-box"></i>
-            <span>Event</span></a>
-    </li>
-
-    @if(auth()->user()->level == 'Admin')
-    <li class="nav-item active">
-        <a class="nav-link" href="{{ route('kategori') }}">
-            <i class="fas fa-cube"></i>
-            <span>Kategori Barang</span></a>
     </li>
     @endif
 
+    @if(auth()->user()->level == 'admin')
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('event.index') }}">
+            <i class="fa fa-list-alt"></i>
+            <span>Event</span></a>
+    </li>
+    @endif
+
+    @if(auth()->user()->level == 'admin')
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('ticket.index') }}">
+            <i class="fas fa-fw fa fa-ticket"></i>
+            <span>Ticket</span></a>
+    </li>
+    @endif
+
+    @if(auth()->user()->level == 'admin')
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('user.index') }}">
+            <i class="fas fa-fw fa-solid fa-box"></i>
+            <span>User</span></a>
+    </li>
+    @endif
+  
+
+
+
+    @if(auth()->user()->level == 'user')
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('events') }}">
+            <i class="fa fa-th-large"></i>
+            <span>Beranda</span></a>
+    </li>
+    @endif
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

@@ -3,11 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgetPassword;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventController;
-use App\Http\Controllers\BarangController;
-use App\Http\Controllers\ProdukController;
-use App\Http\Controllers\KategoriController;
-use Illuminate\Routing\Controllers\Middleware;
+use App\Http\Controllers\TicketController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::controller(AuthController::class)->group(function() {
@@ -40,6 +39,11 @@ Route::get('dashboard', function() {
     return view('dashboard');
 })->name('dashboard');
 
+Route::middleware('auth')->group(function() {
+    Route::get('events', function() {
+        return view('events');
+    })->name('events');
+
 Route::controller(EventController::class)->prefix('event')->group(function() {
     Route::get('', 'index')->name('event.index');
     Route::get('tambah', 'tambah')->name('event.tambah');
@@ -47,6 +51,24 @@ Route::controller(EventController::class)->prefix('event')->group(function() {
     Route::get('edit/{id}', 'edit')->name('event.edit');
     Route::put('update/{id}', 'update')->name('event.update'); // Use PUT method
     Route::delete('destroy/{id}', 'destroy')->name('event.destroy'); // Use DELETE method
+});
+Route::controller(UserController::class)->prefix('user')->group(function() {
+    Route::get('', 'index')->name('user.index');
+    Route::get('tambah', 'tambah')->name('user.tambah');
+    Route::post('store', 'store')->name('user.store');
+    Route::get('edit/{id}', 'edit')->name('user.edit');
+    Route::put('update/{id}', 'update')->name('user.update'); // Use PUT method
+    Route::delete('destroy/{id}', 'destroy')->name('user.destroy'); // Use DELETE method
+});
+Route::controller(TicketController::class)->prefix('ticket')->group(function() {
+    Route::get('', 'index')->name('ticket.index');
+    Route::get('tambah', 'tambah')->name('ticket.tambah');
+    Route::post('store', 'store')->name('ticket.store');
+    Route::get('edit/{id}', 'edit')->name('ticket.edit');
+    Route::put('update/{id}', 'update')->name('ticket.update'); // Use PUT method
+    Route::delete('destroy/{id}', 'destroy')->name('ticket.destroy'); // Use DELETE method
+});
+
 });
 
 });
@@ -56,5 +78,9 @@ Route::get( "/forget-password", [ForgetPassword::class, "forgetPassword"])->name
 Route::post( "/forget-password", [ForgetPassword::class, "forgetPasswordPost"])->name(name: "forget.password.post");
 Route::get("/reset-password/{token}", [ForgetPassword::class, "resetPassword"])->name("reset.password");
 Route::post("/reset-password", [ForgetPassword::class, "resetPasswordPost"])->name("reset.password.post");
+
+Route::get('detail', [HomeController::class, 'detail'])->name('detail');
+Route::get('events', [HomeController::class, 'index'])->name('events');
+
 
 
