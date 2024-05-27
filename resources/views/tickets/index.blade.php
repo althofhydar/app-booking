@@ -5,24 +5,23 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Tabel User</title>
+    <title>Tabel Ticket</title>
 
     <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
     <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -35,13 +34,13 @@
         <div class="container-fluid">
 
             <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800">Table User</h1>
+            <h1 class="h3 mb-2 text-gray-800">Table Ticket</h1>
 
             <!-- DataTables Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUserModal">
-                        <i class="fas fa-plus"></i> Tambah User
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTicketModal">
+                        <i class="fas fa-plus"></i> Tambah Ticket
                     </button>
                 </div>
                 <div class="card-body">
@@ -53,7 +52,7 @@
                                     <th>Event id</th>
                                     <th>Ticket type</th>
                                     <th>Price</th>
-                                    <th>Quantitiy</th>
+                                    <th>Quantity</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -62,81 +61,15 @@
                                 @foreach ($tickets as $row)
                                     <tr>
                                         <th>{{ $no++ }}</th>
-                                        <td>{{ $row->Event_id }}</td>
-                                        <td>{{ $row->Ticket_type }}</td>
-                                        <td>{{ $row->Price }}</td>
-                                        <td>{{ $row->Quantity }}</td>
+                                        <td>{{ $row->event_id }}</td>
+                                        <td>{{ $row->ticket_type }}</td>
+                                        <td>{{ $row->price }}</td>
+                                        <td>{{ $row->quantity }}</td>
                                         <td>
-                                            <button class="btn btn-warning" data-toggle="modal" data-target="#editUserModal{{ $row->id }}"><i class="fas fa-pen-alt"></i> Edit</button>
-                                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteUserModal{{ $row->id }}"><i class="fas fa-trash"></i> Hapus</button>
+                                            <button class="btn btn-warning" data-toggle="modal" data-target="#editTicketModal-{{ $row->id }}"><i class="fas fa-pen-alt"></i> Edit</button>
+                                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteTicketModal-{{ $row->id }}"><i class="fas fa-trash"></i> Hapus</button>
                                         </td>
                                     </tr>
-
-                                    <!-- Edit User Modal -->
-                                    <div class="modal fade" id="editUserModal{{ $row->id }}" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel{{ $row->id }}" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="editUserModalLabel{{ $row->id }}">Edit User</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form action="{{ route('user.update', $row->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <div class="form-group">
-                                                            <label for="nama">Nama</label>
-                                                            <input type="text" class="form-control" id="nama" name="nama" value="{{ $row->nama }}" required>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="email">Email</label>
-                                                            <input type="email" class="form-control" id="email" name="email" value="{{ $row->email }}" required>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="password">Password</label>
-                                                            <input type="password" class="form-control" id="password" name="password" value="{{ $row->password }}" required>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="level">Level</label>
-                                                            <select class="form-control" id="level" name="level" required>
-                                                                <option value="Admin">Admin</option>
-                                                                <option value="User">User</option>
-                                                            </select>
-                                                        </div>
-                                                        
-                                                        <button type="submit" class="btn btn-primary">Update User</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Delete User Modal -->
-                                    <div class="modal fade" id="deleteUserModal{{ $row->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel{{ $row->id }}" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="deleteUserModalLabel{{ $row->id }}">Hapus User</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Apakah anda yakin ingin menghapus user {{ $row->nama }}?</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                    <form action="{{ route('user.destroy', $row->id) }}" method="POST" style="display:inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger">Hapus User</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 @endforeach
                             </tbody>
                         </table>
@@ -144,68 +77,161 @@
                 </div>
             </div>
 
-          <!-- Add Ticket Modal -->
-<div class="modal fade" id="addTicketModal" tabindex="-1" role="dialog" aria-labelledby="addTicketModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addTicketModalLabel">Tambah Tiket</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="{{ route('ticket.store') }}" method="POST">
-                    @csrf
-                    <div class="form-group">
-                        <label for="event_id">Event ID</label>
-                        <select class="form-control" id="event_id" name="event_id" required>
-                            @foreach($events as $event)
-                                <option value="{{ $event->id }}">{{ $event->name }}</option>
-                            @endforeach
-                        </select>
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Add Ticket Modal -->
+        <div class="modal fade" id="addTicketModal" tabindex="-1" role="dialog" aria-labelledby="addTicketModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addTicketModalLabel">Add Ticket</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <label for="ticket_type">Ticket Type</label>
-                        <input type="text" class="form-control" id="ticket_type" name="ticket_type" value="{{ Str::random(8) }}" readonly required>
-                    </div>
-                    <div class="form-group">
-                        <label for="price">Price</label>
-                        <input type="text" class="form-control" id="price" name="price" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="quantity">Quantity</label>
-                        <input type="text" class="form-control" id="quantity" name="quantity" value="1" readonly required>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary">Tambah Tiket</button>
-                </form>
+                    <form action="{{ route('ticket.store') }}" method="POST">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="event_id">Event ID</label>
+                                <select class="form-control" id="event_id" name="event_id" required>
+                                    @foreach ($events as $event)
+                                        <option value="{{ $event->id }}">{{ $event->event_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="ticket_type">Ticket Type</label>
+                                <input type="text" class="form-control" id="ticket_type" name="ticket_type" readonly required>
+                            </div>
+                            <div class="form-group">
+                                <label for="price">Price</label>
+                                <input type="number" class="form-control" id="price" name="price" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="quantity">Quantity</label>
+                                <input type="number" class="form-control" id="quantity" name="quantity" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-        <!-- /.container-fluid -->
+
+        <!-- Edit Ticket Modal -->
+        @foreach ($tickets as $row)
+        <div class="modal fade" id="editTicketModal-{{ $row->id }}" tabindex="-1" role="dialog" aria-labelledby="editTicketModalLabel-{{ $row->id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editTicketModalLabel-{{ $row->id }}">Edit Ticket</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="{{ route('ticket.update', $row->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="event_id">Event ID</label>
+                                <select class="form-control" id="event_id" name="event_id" required>
+                                    @foreach ($events as $event)
+                                        <option value="{{ $event->id }}" {{ $row->event_id == $event->id? 'selected' : '' }}>{{ $event->event_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="ticket_type">Ticket Type</label>
+                                <input type="text" class="form-control" id="ticket_type" name="ticket_type" value="{{ $row->ticket_type }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="price">Price</label>
+                                <input type="number" class="form-control" id="price" name="price" value="{{ $row->price }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="quantity">Quantity</label>
+                                <input type="number" class="form-control" id="quantity" name="quantity" value="{{ $row->quantity }}" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        @endforeach
+
+        <!-- Delete Ticket Modal -->
+        @foreach ($tickets as $row)
+        <div class="modal fade" id="deleteTicketModal-{{ $row->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteTicketModalLabel-{{ $row->id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteTicketModalLabel-{{ $row->id }}">Delete Ticket</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete this ticket?
+                    </div>
+                    <div class="modal-footer">
+                        <form action="{{ route('ticket.destroy', $row->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
 
     </div>
     <!-- /#wrapper -->
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
+    <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
 
 </body>
+<script>
+    // Generate random ticket type when the page is loaded
+    window.onload = function() {
+        document.getElementById('ticket_type').value = generateRandomString(5);
+    };
+
+    // Function to generate a random string of specified length
+    function generateRandomString(length) {
+        const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            result += charset.charAt(Math.floor(Math.random() * charset.length));
+        }
+        return result;
+    }
+</script>
 </html>
 @endsection
