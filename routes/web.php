@@ -5,8 +5,16 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgetPassword;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventController;
-use App\Http\Controllers\TicketController;
+
+
 use App\Http\Controllers\HomeController;
+
+use App\Http\Controllers\BarangController;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\TicketController;
+use Illuminate\Routing\Controllers\Middleware;
+
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::controller(AuthController::class)->group(function() {
@@ -69,7 +77,10 @@ Route::controller(TicketController::class)->prefix('ticket')->group(function() {
     Route::delete('destroy/{id}', 'destroy')->name('ticket.destroy'); // Use DELETE method
 });
 
+
 });
+
+
 
 });
 

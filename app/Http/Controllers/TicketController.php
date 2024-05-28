@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Models\Ticket; // Assuming your Ticket model namespace
 
@@ -11,9 +12,9 @@ class TicketController extends Controller
     {
         // Fetch all tickets from the database
         $tickets = Ticket::all();
-        
+        $events = Event::all(); 
         // Pass the tickets data to the view
-        return view('tickets.index', compact('tickets'));
+        return view('tickets.index', compact('tickets','events'));
     }
 
     public function tambah()

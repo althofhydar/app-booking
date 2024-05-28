@@ -14,8 +14,12 @@ class EventController extends Controller
         return view('event.index',$table);// Logika untuk menampilkan daftar event
     }
 
+
     
 
+
+
+    
  // Fungsi untuk menyimpan event baru
  public function store(Request $request)
  {
