@@ -49,8 +49,8 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Event id</th>
-                                    <th>Ticket type</th>
+                                    <th>Event Name</th>
+                                    <th>Ticket Type</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
                                     <th>Aksi</th>
@@ -61,7 +61,7 @@
                                 @foreach ($tickets as $row)
                                     <tr>
                                         <th>{{ $no++ }}</th>
-                                        <td>{{ $row->event_id }}</td>
+                                        <td>{{ $row->event->event_name }}</td>
                                         <td>{{ $row->ticket_type }}</td>
                                         <td>{{ $row->price }}</td>
                                         <td>{{ $row->quantity }}</td>
@@ -146,7 +146,7 @@
                                 <label for="event_id">Event ID</label>
                                 <select class="form-control" id="event_id" name="event_id" required>
                                     @foreach ($events as $event)
-                                        <option value="{{ $event->id }}" {{ $row->event_id == $event->id? 'selected' : '' }}>{{ $event->event_name}}</option>
+                                        <option value="{{ $event->id }}" {{ $row->event_id == $event->id ? 'selected' : '' }}>{{ $event->event_name }}</option>
                                     @endforeach
                                 </select>
                             </div>

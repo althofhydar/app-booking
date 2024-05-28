@@ -31,9 +31,13 @@ class UserController extends Controller
             'password' => 'required',
             'level' => 'required',
         ]);
-
-        // Create a new user record
+        
+        // Hash the password using bcrypt
+        $validatedData['password'] = bcrypt($validatedData['password']);
+        
+        // Create the user using the validated data
         User::create($validatedData);
+        
 
         // Redirect back with success message
         return redirect()->route('user.index')->with('success', 'User added successfully.');
