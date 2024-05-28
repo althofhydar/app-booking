@@ -36,7 +36,7 @@
                     </li>
                     <li class="border-bottom p-2 d-flex justify-content-between">
                       <span>Paket</span>
-                      <span style="font-weight: 600">{{ $ticket->quantity }}</span>
+                      <span style="font-weight: 600">{{ $ticket->ticket_type }}</span>
                     </li>
                   </ul>
                 </div>
