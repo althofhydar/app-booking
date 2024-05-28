@@ -92,6 +92,7 @@ Route::post("/reset-password", [ForgetPassword::class, "resetPasswordPost"])->na
 
 Route::get('detail', [HomeController::class, 'detail'])->name('detail');
 Route::get('events', [HomeController::class, 'index'])->name('events');
+Route::get('tickets', [HomeController::class, 'index'])->name('tickets');
 
 
 
