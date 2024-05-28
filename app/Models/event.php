@@ -13,5 +13,12 @@ class Event extends Model
 
     protected $fillable = ['event_name','event_date','location','image'];
 
+    // Event.php (Model)
+public function tickets() {
+    return $this->hasMany(Ticket::class);
+    
+}
+
+
    
 }
