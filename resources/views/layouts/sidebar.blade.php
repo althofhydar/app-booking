@@ -31,7 +31,7 @@
     @if(auth()->user()->level == 'admin')
     <li class="nav-item active">
         <a class="nav-link" href="{{ route('ticket.index') }}">
-            <i class="fas fa-fw fa fa-ticket"></i>
+            <i class="fas fa-fw fa-solid fa-box"></i>
             <span>Ticket</span></a>
     </li>
     @endif
@@ -39,7 +39,7 @@
     @if(auth()->user()->level == 'admin')
     <li class="nav-item active">
         <a class="nav-link" href="{{ route('user.index') }}">
-            <i class="fas fa-fw fa-solid fa-box"></i>
+            <i class="fas fa-fw fa-solid fa-user"></i>
             <span>User</span></a>
     </li>
     @endif

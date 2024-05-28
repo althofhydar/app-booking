@@ -103,8 +103,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="ticket_type">Ticket Type</label>
-                                <input type="text" class="form-control" id="ticket_type" name="ticket_type" readonly required>
+                                <select class="form-control" id="ticket_type" name="ticket_type" required>
+                                    <option value="VIP">VIP</option>
+                                    <option value="Regular">Regular</option>
+                                </select>
                             </div>
+                            
                             <div class="form-group">
                                 <label for="price">Price</label>
                                 <input type="number" class="form-control" id="price" name="price" required>
@@ -148,8 +152,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="ticket_type">Ticket Type</label>
-                                <input type="text" class="form-control" id="ticket_type" name="ticket_type" value="{{ $row->ticket_type }}" required>
+                                <select class="form-control" id="ticket_type" name="ticket_type" required>
+                                    <option value="VIP" {{ $row->ticket_type == 'VIP' ? 'selected' : '' }}>VIP</option>
+                                    <option value="Regular" {{ $row->ticket_type == 'Regular' ? 'selected' : '' }}>Regular</option>
+                                </select>
                             </div>
+                            
                             <div class="form-group">
                                 <label for="price">Price</label>
                                 <input type="number" class="form-control" id="price" name="price" value="{{ $row->price }}" required>
@@ -217,21 +225,6 @@
     <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
 
 </body>
-<script>
-    // Generate random ticket type when the page is loaded
-    window.onload = function() {
-        document.getElementById('ticket_type').value = generateRandomString(5);
-    };
 
-    // Function to generate a random string of specified length
-    function generateRandomString(length) {
-        const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        let result = '';
-        for (let i = 0; i < length; i++) {
-            result += charset.charAt(Math.floor(Math.random() * charset.length));
-        }
-        return result;
-    }
-</script>
 </html>
 @endsection
