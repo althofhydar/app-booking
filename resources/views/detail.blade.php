@@ -31,7 +31,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                
                                 <div class="rent-price mb-3">
-                                    <span class="text-primary">Rp.{{ number_format($ticket->price) }}/</span>day
+                                    <span class="text-primary">Rp.{{ number_format($ticket->price) }}</span>
                                 </div>
                             </div>
                             <ul class="list-unstyled list-style-group">

@@ -29,7 +29,7 @@
                   <h5 class="fw-bolder">{{ $event->event_name }}</h5>
                   <!-- Product price-->
                   <div class="rent-price mb-0">
-                    <span class="text-primary">Rp.{{ number_format($ticket->price) }}/</span>day
+                    <span class="text-primary">Rp.{{ number_format($ticket->price) }}</span>
                   </div>
                   <ul class="list-unstyled list-style-group">
                     <li class="border-bottom p-2 d-flex justify-content-between">
