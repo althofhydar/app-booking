@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Models\Ticket; // Assuming your Ticket model namespace
 
 class TicketController extends Controller
@@ -29,20 +30,31 @@ class TicketController extends Controller
 
     public function store(Request $request)
     {
-        // Validate the incoming request
-        $validatedData = $request->validate([
-            'event_id' => 'required|exists:events,id',
+        $request->validate([
+            'event_id' => [
+                'required',
+                Rule::unique('tickets')->where(function ($query) use ($request) {
+                    return $query->where('ticket_type', $request->ticket_type);
+                }),
+            ],
             'ticket_type' => 'required',
             'price' => 'required|numeric',
-            'quantity' => 'required|numeric',
+            'quantity' => 'required|integer',
+        ], [
+            'event_id.unique' => 'The combination of Event and Ticket Type already exists.'
         ]);
-
-        // Create a new ticket instance and save it
-        Ticket::create($validatedData);
-
-        // Redirect back with success message or any other action
-        return redirect()->route('ticket.index')->with('success', 'Ticket added successfully.');
+    
+        // Create the ticket if validation passes
+        Ticket::create([
+            'event_id' => $request->event_id,
+            'ticket_type' => $request->ticket_type,
+            'price' => $request->price,
+            'quantity' => $request->quantity,
+        ]);
+    
+        return redirect()->route('tickets.index')->with('success', 'Ticket added successfully.');
     }
+    
 
     public function edit($id)
     {
@@ -55,29 +67,29 @@ class TicketController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Validate the incoming request
-        $validatedData = $request->validate([
-            'event_id' => 'required|exists:events,id',
+        $request->validate([
+            'event_id' => [
+                'required',
+                Rule::unique('tickets')->where(function ($query) use ($request, $id) {
+                    return $query->where('ticket_type', $request->ticket_type)->where('id', '!=', $id);
+                }),
+            ],
             'ticket_type' => 'required',
             'price' => 'required|numeric',
-            'quantity' => 'required|numeric',
+            'quantity' => 'required|integer',
+        ], [
+            'event_id.unique' => 'The combination of Event and Ticket Type already exists.'
         ]);
-
-        // Find the ticket by id and update its data
-        $ticket = Ticket::findOrFail($id);
-        $ticket->update($validatedData);
-
-        // Redirect back with success message or any other action
-        return redirect()->route('ticket.index')->with('success', 'Ticket updated successfully.');
+    
+        $ticket = Ticket::find($id);
+        $ticket->update([
+            'event_id' => $request->event_id,
+            'ticket_type' => $request->ticket_type,
+            'price' => $request->price,
+            'quantity' => $request->quantity,
+        ]);
+    
+        return redirect()->route('tickets.index')->with('success', 'Ticket updated successfully.');
     }
-
-    public function destroy($id)
-    {
-        // Find the ticket by id and delete it
-        $ticket = Ticket::findOrFail($id);
-        $ticket->delete();
-
-        // Redirect back with success message or any other action
-        return redirect()->route('ticket.index')->with('success', 'Ticket deleted successfully.');
-    }
+    
 }

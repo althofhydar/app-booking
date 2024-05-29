@@ -103,10 +103,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="ticket_type">Ticket Type</label>
-                                <select class="form-control" id="ticket_type" name="ticket_type" required>
-                                    <option value="VIP">VIP</option>
-                                    <option value="Regular">Regular</option>
-                                </select>
+                                <input type="text" class="form-control" id="ticket_type" name="ticket_type" required>
                             </div>
                             
                             <div class="form-group">
@@ -152,10 +149,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="ticket_type">Ticket Type</label>
-                                <select class="form-control" id="ticket_type" name="ticket_type" required>
-                                    <option value="VIP" {{ $row->ticket_type == 'VIP' ? 'selected' : '' }}>VIP</option>
-                                    <option value="Regular" {{ $row->ticket_type == 'Regular' ? 'selected' : '' }}>Regular</option>
-                                </select>
+                                <input type="text" class="form-control" id="ticket_type" name="ticket_type" value="{{ $row->ticket_type }}" required>
                             </div>
                             
                             <div class="form-group">

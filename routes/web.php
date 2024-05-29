@@ -25,7 +25,7 @@ Route::controller(AuthController::class)->group(function() {
 });
 
 Route::get('/', function () {
-    return view('login');
+    return view('auth.login');
 });
 Route::get('/register', [AuthController::class, "register"])->name('register');
 Route::post('/register', [AuthController::class, "registerProses"])->name('registerProses');
