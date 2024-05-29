@@ -19,9 +19,16 @@ class HomeController extends Controller
  }
  
 
- public function detail()
+ public function detail($id)
  {
-     return view('detail');
+     // Mengambil satu data Event berdasarkan ID
+     $events = Event::findOrFail($id);
+ 
+     // Mengambil tiket yang berkaitan dengan event tersebut berdasarkan event_id
+     $tickets = Ticket::where('event_id', $id)->get();
+ 
+     return view('detail', compact('events', 'tickets'));
  }
+ 
 
 }

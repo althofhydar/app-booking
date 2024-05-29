@@ -90,9 +90,10 @@ Route::post( "/forget-password", [ForgetPassword::class, "forgetPasswordPost"])-
 Route::get("/reset-password/{token}", [ForgetPassword::class, "resetPassword"])->name("reset.password");
 Route::post("/reset-password", [ForgetPassword::class, "resetPasswordPost"])->name("reset.password.post");
 
-Route::get('detail', [HomeController::class, 'detail'])->name('detail');
+Route::get('detail/{events:id}', [HomeController::class, 'detail'])->name('detail');
 Route::get('events', [HomeController::class, 'index'])->name('events');
 Route::get('tickets', [HomeController::class, 'index'])->name('tickets');
+
 
 
 
