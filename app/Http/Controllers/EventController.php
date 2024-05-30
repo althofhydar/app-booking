@@ -75,6 +75,8 @@ class EventController extends Controller
             'event_name' => $request->event_name,
             'event_date' => $request->event_date,
             'location' => $request->location,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
             'image' => $event->image,
         ]);
     
