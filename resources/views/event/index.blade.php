@@ -55,6 +55,8 @@
                                     <th>Nama Event</th>
                                     <th>Jadwal Event</th>
                                     <th>Lokasi Event</th>
+                                    <th>Waktu Mulai</th>
+                                    <th>Waktu Selesai</th>
                                     <th>Gambar</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -68,6 +70,9 @@
                                         <td>{{ $row->event_name }}</td>
                                         <td>{{ $row->event_date }}</td>
                                         <td>{{ $row->location }}</td>
+                                        <td>{{ $row->start_time }}</td>
+                                        <td>{{ $row->end_time }}</td>
+
                                         <td>
                                             @if ($row->image)
                                                 <img src="{{ asset('storage/' . $row->image) }}" alt="{{ $row->event_name }}" width="100">
@@ -170,9 +175,18 @@
                                     <input type="text" class="form-control" id="event_name" name="event_name" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="event_date">Jadwal Event</label>
+                                    <label for="event_date">Tanggal Event</label>
                                     <input type="date" class="form-control" id="event_date" name="event_date" required>
                                 </div>
+                                <div class="form-group">
+                                    <label for="start_time">Waktu Mulai</label>
+                                    <input type="time" class="form-control" id="start_time" name="start_time" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="end_time">Waktu Selesai</label>
+                                    <input type="time" class="form-control" id="end_time" name="end_time" required>
+                                </div>
+                                
                                 <div class="form-group">
                                     <label for="location">Lokasi Event</label>
                                     <input type="text" class="form-control" id="location" name="location" required>

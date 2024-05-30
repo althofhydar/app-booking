@@ -23,13 +23,16 @@ class EventController extends Controller
  // Fungsi untuk menyimpan event baru
  public function store(Request $request)
  {
+    // dd($request->all());
      $request->validate([
          'event_name' => 'required|string|max:255',
          'event_date' => 'required|date',
+         'start_time' => 'required',
+         'end_time' => 'required',
          'location' => 'required|string|max:255',
          'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
      ]);
- 
+
      if ($request->hasFile('image')) {
          $path = $request->file('image')->store('event_images', 'public');
      } else {
@@ -40,22 +43,13 @@ class EventController extends Controller
          'event_name' => $request->event_name,
          'event_date' => $request->event_date,
          'location' => $request->location,
+         'start_time' => $request->start_time,
+         'end_time' => $request->end_time,
          'image' => $path,
      ]);
  
      return redirect()->route('event.index')->with('success', 'Event created successfully.');
  }
-
-
-
-
-
-
-
-
-
-
-
 
 
     public function update(Request $request, $id)
