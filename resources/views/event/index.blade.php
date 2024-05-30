@@ -78,6 +78,7 @@
                                                 <img src="{{ asset('storage/' . $row->image) }}" alt="{{ $row->event_name }}" width="100">
                                             @endif
                                         </td>
+                                        
                                         <td>
                                             <button class="btn btn-warning" data-toggle="modal" data-target="#editEventModal{{ $row->id }}"><i class="fas fa-pen-alt"></i> Edit</button>
                                             <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEventModal{{ $row->id }}"><i class="fas fa-trash"></i> Hapus</button>
@@ -164,57 +165,50 @@
                 </div>
             </div>
             
-            <!-- Add Event Modal -->
-            <div class="modal fade" id="addEventModal" tabindex="-1" role="dialog" aria-labelledby="addEventModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="addEventModalLabel">Tambah Event</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        
-                        <div class="modal-body">
-                            <form action="{{ route('event.store') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="event_name">Nama Event</label>
-                                    <input type="text" class="form-control" id="event_name" name="event_name" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="event_date">Tanggal Event</label>
-                                    <input type="date" class="form-control" id="event_date" name="event_date" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="start_time">Waktu Mulai</label>
-                                    <input type="time" class="form-control" id="start_time" name="start_time" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="end_time">Waktu Selesai</label>
-                                    <input type="time" class="form-control" id="end_time" name="end_time" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="location">Lokasi Event</label>
-                                    <input type="text" class="form-control" id="location" name="location" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="image">Gambar Event</label>
-                                    <input type="file" class="form-control" id="image" name="image" accept="image/*">
-                                </div>
-                                <button type="submit" class="btn btn-primary">Tambah Event</button>
-                            </form>
-                            
-                            
-                        </div>
-                        
-                    </div>
-                </div>
+          <!-- Add Event Modal -->
+<div class="modal fade" id="addEventModal" tabindex="-1" role="dialog" aria-labelledby="addEventModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addEventModalLabel">Tambah Event</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-
+            <div class="modal-body">
+                <form action="{{ route('event.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <label for="event_name">Nama Event</label>
+                        <input type="text" class="form-control" id="event_name" name="event_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="event_date">Tanggal Event</label>
+                        <input type="date" class="form-control" id="event_date" name="event_date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="start_time">Waktu Mulai</label>
+                        <input type="time" class="form-control" id="start_time" name="start_time" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="end_time">Waktu Selesai</label>
+                        <input type="time" class="form-control" id="end_time" name="end_time" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Lokasi Event</label>
+                        <input type="text" class="form-control" id="location" name="location" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Gambar Event</label>
+                        <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Tambah Event</button>
+                </form>
+            </div>
         </div>
-       
+    </div>
+</div>
+
         <!-- /.container-fluid -->
     </div>
     <!-- /#wrapper -->
