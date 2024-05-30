@@ -47,6 +47,10 @@
                                 <span>Tanggal</span>
                                 <span style="font-weight: 600">{{ $events->event_date }}</span>
                               </li>
+                              <li class="border-bottom p-2 d-flex justify-content-between">
+                                <span>Waktu</span>
+                                <span style="font-weight: 600">{{ $events->start_time }}-{{ $events->end_time }}</span>
+                              </li>
                             </ul>
                         </div>
                     </div>
@@ -54,7 +58,7 @@
                     <div class="card-footer border-top-0 bg-transparent">
                         <div class="text-center">
                             <a class="btn d-flex align-items-center justify-content-center btn-primary mt-auto"
-                                href="#" style="column-gap: 0.4rem">Beli Ticket<i class="ri-whatsapp-line"></i></a>
+                                href="{{ route('beli', $events->id) }}" style="column-gap: 0.4rem">Beli Ticket<i class="ri-whatsapp-line"></i></a>
                         </div>
                     </div>
                 </div>

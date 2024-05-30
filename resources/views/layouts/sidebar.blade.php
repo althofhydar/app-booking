@@ -21,9 +21,15 @@
     @endif
 
     @if(auth()->user()->level == 'admin')
+    <hr class="sidebar-divider d-none d-md-block">
+    @endif
+   
+    
+
+    @if(auth()->user()->level == 'admin')
     <li class="nav-item active">
         <a class="nav-link" href="{{ route('event.index') }}">
-            <i class="fa fa-list-alt"></i>
+            <i class="	far fa-calendar-alt"></i>
             <span>Event</span></a>
     </li>
     @endif
@@ -31,7 +37,7 @@
     @if(auth()->user()->level == 'admin')
     <li class="nav-item active">
         <a class="nav-link" href="{{ route('ticket.index') }}">
-            <i class="fas fa-fw fa-solid fa-box"></i>
+            <i class="fas fa-fw fa-solid fa fa-calendar"></i>
             <span>Ticket</span></a>
     </li>
     @endif
@@ -50,14 +56,22 @@
     @if(auth()->user()->level == 'user')
     <li class="nav-item active">
         <a class="nav-link" href="{{ route('events') }}">
-            <i class="fa fa-th-large"></i>
+            <i class="	fas fa-home"></i>
             <span>Beranda</span></a>
+    </li>
+    @endif
+    @if(auth()->user()->level == 'user')
+    <li class="nav-item active">
+        <a class="nav-link" href="">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Pembelian</span></a>
     </li>
     @endif
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
-
+    
+    
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>

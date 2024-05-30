@@ -91,5 +91,13 @@ class TicketController extends Controller
     
         return redirect()->route('tickets.index')->with('success', 'Ticket updated successfully.');
     }
+
+    public function destroy($id)
+    {
+        $ticket = Ticket::findOrFail($id);
+        $ticket->delete();
+
+        return redirect()->back()->with('success', 'Ticket deleted successfully.');
+    }
     
 }

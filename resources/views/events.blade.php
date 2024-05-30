@@ -11,7 +11,7 @@
     <h3 class="text-center mb-5">Daftar Event</h3>
     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-left">
       @foreach ($events as $event)
-        @foreach ($event->tickets as $ticket)
+      
           <div class="col mb-5">
             <div class="card h-100">
               <!-- Sale badge-->
@@ -22,42 +22,44 @@
               <img class="card-img-top" src="{{ asset('storage/' . $event->image) }}"  style="height: 200px";
               width="500px";  alt="{{ $event->event_name }}" />
               <!-- Product details-->
-              <div class="card-body card-body-custom pt-2"  style="height: 200px";
+              <div class="card-body card-body-custom pt-2"  style="height: 175px";
               width="500px"; >
                 <div class="text-center">
                   <!-- Product name-->
                   <h5 class="fw-bolder">{{ $event->event_name }}</h5>
                   <!-- Product price-->
-                  <div class="rent-price mb-0">
-                    <span class="text-primary">Rp.{{ number_format($ticket->price) }}</span>
-                  </div>
+                
                   <ul class="list-unstyled list-style-group">
-                    <li class="border-bottom p-2 d-flex justify-content-between">
-                      <span>Jumlah Ticket</span>
-                      <span style="font-weight: 600">{{ $ticket->quantity }}</span>
-                    </li>
-                    <li class="border-bottom p-2 d-flex justify-content-between">
-                      <span>Paket</span>
-                      <span style="font-weight: 600">{{ $ticket->ticket_type }}</span>
-                    </li>
+                
+                 
                     <li class="border-bottom p-2 d-flex justify-content-between">
                       <span>Tgl</span>
                       <span style="font-weight: 600">{{ $event->event_date }}</span>
                     </li>
+                    <li class="border-bottom p-2 d-flex justify-content-between">
+                      <span>Start</span>
+                      <span style="font-weight: 600">{{ $event->start_time }}</span>
+                    </li>
+                    <li class="border-bottom p-2 d-flex justify-content-between">
+                      <span>End</span>
+                      <span style="font-weight: 600">{{ $event->end_time }}</span>
+                    </li>
+
                   </ul>
                 </div>
               </div>
+
               <!-- Product actions-->
               <div class="card-footer border-top-0 bg-transparent">
                 <div class="text-center">
-                  <a class="btn btn-primary mt-auto" href="#">Beli Ticket</a>
-                  <a class="btn btn-info mt-auto text-white" href="{{ route('detail', $event->id) }}">Detail</a>
+                 
+                  <a class="btn d-flex align-items-center justify-content-center btn-primary mt-auto" href="{{ route('detail', $event->id) }}">Detail</a>
                 </div>
               </div>
             </div>
           </div>
         @endforeach
-      @endforeach
+      
     </div>
   </div>
 </section>

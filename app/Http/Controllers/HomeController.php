@@ -31,4 +31,12 @@ class HomeController extends Controller
  }
  
 
+ public function beli($id)
+ {
+    $events = Event::all();
+    $selectedEvent = $events->find($id);
+    return view('beli', compact('events', 'selectedEvent'));
+}
+
+
 }

@@ -111,6 +111,14 @@
                                                             <input type="text" class="form-control" id="location" name="location" value="{{ $row->location }}" required>
                                                         </div>
                                                         <div class="form-group">
+                                                            <label for="location">Mulai Event</label>
+                                                            <input type="time" class="form-control" id="start_time" name="start_time" value="{{ $row->start_time }}" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="location">Selesai Event</label>
+                                                            <input type="time" class="form-control" id="end_time" name="end_time" value="{{ $row->end_time }}" required>
+                                                        </div>
+                                                        <div class="form-group">
                                                             <label for="image">Gambar Event</label>
                                                             <input type="file" class="form-control" id="image" name="image" accept="image/*">
                                                             @if ($row->image)
