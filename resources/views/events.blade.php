@@ -33,7 +33,7 @@
                 
                  
                     <li class="border-bottom p-2 d-flex justify-content-between">
-                      <span>Tgl</span>
+                      <span>Date</span>
                       <span style="font-weight: 600">{{ $event->event_date }}</span>
                     </li>
                     <li class="border-bottom p-2 d-flex justify-content-between">

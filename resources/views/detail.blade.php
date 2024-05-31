@@ -13,7 +13,7 @@
                     <div class="card-body card-body-custom pt-4">
                         <div>
                             <!-- Product name-->
-                            <h3 class="fw-bolder text-primary">Nama Event</h3>
+                            <h3 class="fw-bolder text-primary">Event Name</h3>
                             
                               <h4 class="fw-bolder">{{ $events->event_name }}</h4>
                             
@@ -44,11 +44,11 @@
                                 <span style="font-weight: 600">{{ $ticket->ticket_type }}</span>
                               </li>
                               <li class="border-bottom p-2 d-flex justify-content-between">
-                                <span>Tanggal</span>
+                                <span>Date</span>
                                 <span style="font-weight: 600">{{ $events->event_date }}</span>
                               </li>
                               <li class="border-bottom p-2 d-flex justify-content-between">
-                                <span>Waktu</span>
+                                <span>Time</span>
                                 <span style="font-weight: 600">{{ $events->start_time }}-{{ $events->end_time }}</span>
                               </li>
                             </ul>
