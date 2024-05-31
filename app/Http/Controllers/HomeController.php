@@ -38,5 +38,15 @@ class HomeController extends Controller
     return view('beli', compact('events', 'selectedEvent'));
 }
 
+public function search(Request $request)
+{
+    $query = $request->input('query');
+    $events = Event::where('event_name', 'like', "%{$query}%")
+                    ->orWhere('event_date', 'like', "%{$query}%")
+                    ->get();
+
+    return view('events', ['events' => $events]);
+}
+
 
 }

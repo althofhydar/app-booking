@@ -4,7 +4,12 @@
 <!-- Navigation-->
 
 <!-- Header-->
-
+<form method="GET" action="{{ route('events.search') }}">
+  <div class="input-group mb-3">
+    <input type="text" name="query" class="form-control" placeholder="Search events..." aria-label="Search events" aria-describedby="button-addon2">
+    <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
+  </div>
+</form>
 <!-- Section-->
 <section class="py-1">
   <div class="container px-1 px-lg-1 mt-1">
