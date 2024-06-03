@@ -12,6 +12,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\TicketController;
 use Illuminate\Routing\Controllers\Middleware;
 
@@ -93,10 +94,13 @@ Route::post("/reset-password", [ForgetPassword::class, "resetPasswordPost"])->na
 Route::get('detail/{events:id}', [HomeController::class, 'detail'])->name('detail');
 Route::get('events', [HomeController::class, 'index'])->name('events');
 Route::get('tickets', [HomeController::class, 'index'])->name('tickets');
-Route::get('beli/{events:id}', [HomeController::class, 'beli'])->name('beli');
+Route::get('beli/{ticket:ticket_type}', [HomeController::class, 'beli'])->name('beli');
 Route::get('/events', [HomeController::class, 'index'])->name('events');
+Route::post('/submit-form', [HomeController::class, 'submitForm'])->name('submit-form');
+Route::get('/checkout/{id}', [HomeController::class, 'checkout'])->name('checkout');
 
-
+Route::get('pembelian', [PembelianController::class, 'index'])->name('pembelian');
+Route::delete('destroy/{id}',[PembelianController::class, 'destroy'])->name('pembelian.destroy'); // Use DELETE method
 
 
 

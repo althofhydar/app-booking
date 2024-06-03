@@ -52,7 +52,7 @@ class TicketController extends Controller
             'quantity' => $request->quantity,
         ]);
     
-        return redirect()->route('tickets.index')->with('success', 'Ticket added successfully.');
+        return redirect()->route('ticket.index')->with('success', 'Ticket added successfully.');
     }
     
 
@@ -89,7 +89,7 @@ class TicketController extends Controller
             'quantity' => $request->quantity,
         ]);
     
-        return redirect()->route('tickets.index')->with('success', 'Ticket updated successfully.');
+        return redirect()->route('ticket.index')->with('success', 'Ticket updated successfully.');
     }
 
     public function destroy($id)

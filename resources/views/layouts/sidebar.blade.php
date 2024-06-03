@@ -62,9 +62,16 @@
     @endif
     @if(auth()->user()->level == 'user')
     <li class="nav-item active">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{ route('pembelian') }}">
             <i class="fas fa-shopping-cart"></i>
             <span>Pembelian</span></a>
+    </li>
+    @endif
+    @if(auth()->user()->level == 'user')
+    <li class="nav-item active">
+        <a class="nav-link" href="">
+            <i class="fas fa-history"></i>
+            <span>History</span></a>
     </li>
     @endif
 
