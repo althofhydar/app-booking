@@ -31,17 +31,25 @@ class HomeController extends Controller
  }
  
 
- public function beli($ticket_type)
- {
-     // Ambil data tiket berdasarkan ticket_type
-     $selectedTicket = Ticket::where('ticket_type', $ticket_type)->firstOrFail();
+
+
+
+
+public function beli($id)
+{
+    $events = Event::all();
+    $selectedEvent = $events->find($id);
+    
+    $tickets = Ticket::where('event_id', $id)->get(); // Ambil tiket berdasarkan ID event
+    // Jika menggunakan Eloquent, gunakan 'where' untuk mencari tiket yang terkait dengan event yang dipilih
+    
+    return view('beli', compact('events', 'tickets', 'selectedEvent'));
+}
+
+
  
-     // Ambil data acara yang terkait dengan tiket yang dipilih
-     $selectedEvent = $selectedTicket->event;
  
-     // Kembalikan view bersama dengan data acara dan tiket
-     return view('beli', compact('selectedEvent', 'selectedTicket'));
- }
+ 
  
 
 

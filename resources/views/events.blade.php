@@ -4,25 +4,24 @@
 <!-- Navigation-->
 
 <!-- Header-->
-<form method="GET" action="{{ route('events.search') }}">
-  <div class="input-group mb-3">
-    <input type="text" name="query" class="form-control" placeholder="Search events..." aria-label="Search events" aria-describedby="button-addon2">
-    <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
-  </div>
-</form>
+
 <!-- Section-->
 <section class="py-1">
-  <div class="container px-1 px-lg-1 mt-1">
+  <div class="container px-1 px-lg-1 mt-1" >
     <h3 class="text-center mb-5">Daftar Event</h3>
+    <form method="GET" action="{{ route('events.search') }}" class="mb-4" >
+      <div class="input-group input-group-sm">
+        <input type="text" name="query" class="form-control" placeholder="Search events..." aria-label="Search events" aria-describedby="button-addon2"  style="height: 50px"; >
+        <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
+      </div>
+    </form>
     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-left">
       @foreach ($events as $event)
       
           <div class="col mb-5">
             <div class="card h-100">
               <!-- Sale badge-->
-              <div class="badge badge-custom bg-warning text-white position-absolute" style="top: 0; right: 0">
-                Tidak Tersedia
-              </div>
+              
               <!-- Product image-->
               <img class="card-img-top" src="{{ asset('storage/' . $event->image) }}"  style="height: 200px";
               width="500px";  alt="{{ $event->event_name }}" />
@@ -64,8 +63,11 @@
             </div>
           </div>
         @endforeach
-      
+
+        
+
     </div>
   </div>
 </section>
+
 @endsection
