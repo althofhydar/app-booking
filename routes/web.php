@@ -95,7 +95,7 @@ Route::get('events', [HomeController::class, 'index'])->name('events');
 Route::get('tickets', [HomeController::class, 'index'])->name('tickets');
 Route::get('beli/{events:id}', [HomeController::class, 'beli'])->name('beli');
 Route::get('/events', [HomeController::class, 'index'])->name('events');
-Route::get('/events/search', [HomeController::class, 'search'])->name('events.search');
+
 
 
 
