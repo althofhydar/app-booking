@@ -61,9 +61,9 @@
                                 @if ($selectedEvent)
                                     <tr>
                                         <td>{{ $selectedEvent->event_name }}</td>
-                                        <td>{{ $selectedEvent->ticket_type }}</td>
+                                        <td>{{ $selectedTicket->ticket_type }}</td>
                                         <td>{{ $selectedEvent->location }}</td>
-                                        <td>{{ $selectedEvent->price }}</td>
+                                        <td>{{ $selectedTicket->price }}</td>
                                         <td>{{ $selectedEvent->event_date }}</td>
                                         <td>{{ $selectedEvent->start_time }}</td>
                                         <td>{{ $selectedEvent->end_time }}</td>
