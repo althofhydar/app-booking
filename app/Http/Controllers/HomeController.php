@@ -31,12 +31,22 @@ class HomeController extends Controller
  }
  
 
- public function beli($id)
- {
+public function beli($id)
+{
     $events = Event::all();
     $selectedEvent = $events->find($id);
-    return view('beli', compact('events', 'selectedEvent'));
+    
+    $tickets = Ticket::where('event_id', $id)->get(); // Ambil tiket berdasarkan ID event
+    // Jika menggunakan Eloquent, gunakan 'where' untuk mencari tiket yang terkait dengan event yang dipilih
+    
+    return view('beli', compact('events', 'tickets', 'selectedEvent'));
 }
+
+ 
+ 
+ 
+ 
+
 
 public function search(Request $request)
 {

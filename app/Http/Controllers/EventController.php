@@ -84,4 +84,10 @@ class EventController extends Controller
 
         return redirect()->back()->with('success', 'Event deleted successfully.');
     }
+
+    public function show($id)
+{
+    $selectedEvent = Event::with('tickets')->findOrFail($id);
+    return view('beli', compact('selectedEvent'));
+}
 }
