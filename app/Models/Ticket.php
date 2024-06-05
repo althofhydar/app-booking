@@ -12,9 +12,9 @@ class Ticket extends Model
         'event_id', 'ticket_type', 'price', 'quantity',
     ];
     public function event()
-{
-    return $this->belongsTo(Event::class);
-}
+    {
+        return $this->belongsTo(Event::class);
+    }
 
 
 }

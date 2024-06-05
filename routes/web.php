@@ -10,6 +10,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PembelianController;
@@ -102,7 +103,7 @@ Route::get('/checkout/{id}', [HomeController::class, 'checkout'])->name('checkou
 Route::get('pembelian', [PembelianController::class, 'index'])->name('pembelian');
 Route::delete('destroy/{id}',[PembelianController::class, 'destroy'])->name('pembelian.destroy'); // Use DELETE method
 
-
-
+Route::post('/pembelian/confirm/{id}', [PembelianController::class, 'confirm'])->name('pembelian.confirm');
+Route::get('history', [HistoryController::class, 'index'])->name('history');
 
 

@@ -69,7 +69,7 @@
     @endif
     @if(auth()->user()->level == 'user')
     <li class="nav-item active">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{ route('history') }}">
             <i class="fas fa-history"></i>
             <span>History</span></a>
     </li>

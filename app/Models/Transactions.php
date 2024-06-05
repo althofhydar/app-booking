@@ -10,6 +10,7 @@ class Transactions extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'event_name',
         'ticket_type',
         'location',
@@ -19,4 +20,14 @@ class Transactions extends Model
         'ticket_id',
         'payment_method',
     ];
+
+    // app/Models/Transaction.php
+
+   // dalam model Transaction
+public function ticket()
+{
+    return $this->belongsTo(Ticket::class);
+}
+
+
 }
