@@ -66,7 +66,7 @@ class HomeController extends Controller
  
      if ($existingTransaction) {
          // Redirect back with an error message
-         return redirect()->back()->with('error', 'Data sudah ada di table history.');
+         return redirect()->back()->with('error', 'hanya bisa membeli 1 ticket.');
      }
 
      $existingTransaction = Transactions::where('event_name', Event::find($validated['event_id'])->event_name)
@@ -75,7 +75,7 @@ class HomeController extends Controller
 
 if ($existingTransaction) {
 // Redirect back with an error message
-return redirect()->back()->with('error', 'Data sudah ada di table Pembelian.');
+return redirect()->back()->with('error', 'ticket sudah ada di table pembelian.');
 }
  
      // Get event data from database based on event_id

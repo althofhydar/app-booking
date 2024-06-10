@@ -30,6 +30,11 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if($histories->isEmpty())
+                        <tr>
+                            <td colspan="9" class="text-center">No data available</td>
+                        </tr>
+                    @else
                         @foreach($histories as $history)
                             <tr>
                                 <td>{{ $history->event_name }}</td>
@@ -46,6 +51,7 @@
                                 
                             </tr>
                         @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>

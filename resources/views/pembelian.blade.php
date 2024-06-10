@@ -28,6 +28,12 @@
                     </thead>
                 
                     <tbody>
+
+                        @if($transactions->isEmpty())
+    <tr>
+        <td colspan="9" class="text-center">No data available</td>
+    </tr>
+@else
                         @foreach($transactions as $transaction)
                         <tr>
                             <td>{{ $transaction->event_name }}</td>
@@ -42,7 +48,9 @@
                                 <button class="btn btn-success" data-toggle="modal" data-target="#purchaseModal{{ $transaction->id }}"><i class="fas fa-shopping-cart"></i></button>
                                 <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEventModal{{ $transaction->id }}"><i class="fas fa-trash"></i></button>
                             </td>
+
                         </tr>
+
                         
                         <!-- Delete Modal -->
                         <div class="modal fade" id="deleteEventModal{{ $transaction->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteEventModalLabel{{ $transaction->id }}" aria-hidden="true">
@@ -100,6 +108,7 @@
     </div>
 </div>
 @endforeach
+@endif
                     </tbody>
                    
                 </table>
