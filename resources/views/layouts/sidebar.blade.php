@@ -49,6 +49,13 @@
             <span>User</span></a>
     </li>
     @endif
+    @if(auth()->user()->level == 'admin')
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('admin.cek') }}">
+            <i class="fas fa-fw fa-solid fa-user"></i>
+            <span>Konfirmasi</span></a>
+    </li>
+    @endif
   
 
 

@@ -55,6 +55,7 @@ class PembelianController extends Controller
                     'start' => $transaction->start,
                     'end' => $transaction->end,
                     'payment_method' => $transaction->payment_method,
+                  
                 ]);
     
                 // Hapus transaksi dari tabel transactions

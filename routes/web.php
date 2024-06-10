@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgetPassword;
@@ -105,7 +106,13 @@ Route::delete('destroy/{id}',[PembelianController::class, 'destroy'])->name('pem
 Route::post('/pembelian/confirm/{id}', [PembelianController::class, 'confirm'])->name('pembelian.confirm');
 
 Route::get('history', [HistoryController::class, 'index'])->name('history');
+Route::post('/add-to-ceks', [HistoryController::class, 'addToCeks'] )->name('addToCeks');
+// web.php
+Route::post('/history/request-print', [HistoryController::class, 'requestPrint'])->name('history.requestPrint');
 
+//admin
+Route::get('/cek', [AdminController::class, 'cek'])->name('admin.cek');
+Route::post('/confirm/{ticket_type}', [HistoryController::class, 'confirm'])->name('confirm');
 
 
 
