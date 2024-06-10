@@ -32,28 +32,41 @@ class PembelianController extends Controller
     public function confirm(Request $request, $id)
     {
         // Ambil detail transaksi
-        $transaction = Transactions::find($id);
+      $transaction = Transactions::find($id);
 
-        // Lakukan logika konfirmasi pembelian
-        $transaction->confirmed = true;
-        $transaction->save();
+        if ($transaction) {
+            // Pindahkan data ke tabel histories
+            $history = History::create([
+                'event_name' => $transaction->event_name,
+                'ticket_type' => $transaction->ticket_type,
+                'location' => $transaction->location,
+                'price' => $transaction->price,
+                'tanggal' => $transaction->tanggal,
+                'start' => $transaction->start,
+                'end' => $transaction->end,
+                'payment_method' => $transaction->payment_method,
+            ]);
 
-        // Siapkan data struk
-        $receiptData = [
-            'event_name' => $transaction->event_name,
-            'ticket_type' => $transaction->ticket_type,
-            'location' => $transaction->location,
-            'price' => $transaction->price,
-            'tanggal' => $transaction->tanggal,
-            'start' => $transaction->start,
-            'end' => $transaction->end,
-            'payment_method' => $transaction->payment_method,
-        ];
+            // Hapus transaksi dari tabel transactions
+            $transaction->delete();
 
-        // Generate PDF
-        $pdf = Pdf::loadView('receipt', ['receipt' => $receiptData]);
-        
-        // Return PDF sebagai respons
-        return $pdf->stream('receipt.pdf');
+            // Redirect ke halaman struk dengan pesan sukses dan data history
+            $receiptData = [
+                'event_name' => $transaction->event_name,
+                'ticket_type' => $transaction->ticket_type,
+                'location' => $transaction->location,
+                'price' => $transaction->price,
+                'tanggal' => $transaction->tanggal,
+                'start' => $transaction->start,
+                'end' => $transaction->end,
+                'payment_method' => $transaction->payment_method,
+            ];
+    
+            // Generate PDF
+            $pdf = Pdf::loadView('receipt', ['receipt' => $receiptData]);
+            
+            // Return PDF sebagai respons
+            return $pdf->stream('receipt.pdf');
     }
+}
 }

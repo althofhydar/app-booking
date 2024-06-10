@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Ticket;
-use App\Models\Transaction;
+use App\Models\History;
 use App\Models\Transactions;
 
 class HomeController extends Controller
@@ -15,9 +15,10 @@ class HomeController extends Controller
  {
      $events = Event::all();
      $tickets = Ticket::all();
+     $acakevent = $events->shuffle();
    
 
-     return view('events', compact('events', 'tickets'));
+     return view('events', compact('acakevent', 'tickets'));
  }
  
 
@@ -51,21 +52,40 @@ class HomeController extends Controller
 
  public function submitForm(Request $request)
  {
-     // Validasi request data
+     // Validate request data
      $validated = $request->validate([
          'event_id' => 'required|integer|exists:events,id',
          'ticket_id' => 'required|integer|exists:tickets,id',
          'payment_method' => 'required|string'
      ]);
  
-     // Dapatkan data event dari database berdasarkan event_id
+     // Check for existing transaction in history table
+     $existingTransaction = History::where('event_name', Event::find($validated['event_id'])->event_name)
+                                   ->where('ticket_type', Ticket::find($validated['ticket_id'])->ticket_type)
+                                   ->first();
+ 
+     if ($existingTransaction) {
+         // Redirect back with an error message
+         return redirect()->back()->with('error', 'Data sudah ada di table history.');
+     }
+
+     $existingTransaction = Transactions::where('event_name', Event::find($validated['event_id'])->event_name)
+     ->where('ticket_type', Ticket::find($validated['ticket_id'])->ticket_type)
+     ->first();
+
+if ($existingTransaction) {
+// Redirect back with an error message
+return redirect()->back()->with('error', 'Data sudah ada di table Pembelian.');
+}
+ 
+     // Get event data from database based on event_id
      $event = Event::findOrFail($validated['event_id']);
      
-     // Dapatkan data tiket dari database berdasarkan ticket_id
+     // Get ticket data from database based on ticket_id
      $ticket = Ticket::findOrFail($validated['ticket_id']);
  
-     // Simpan data transaksi
-     $transaction = new Transactions();
+     // Save transaction data
+     $transaction = new Transactions(); // Assuming History is the model for your history table
      // Assign event name to transaction
      $transaction->event_name = $event->event_name;
      // Assign ticket type to transaction
@@ -79,17 +99,15 @@ class HomeController extends Controller
      $transaction->payment_method = $validated['payment_method'];
      $transaction->save();
  
-     // Redirect ke halaman checkout dengan ID transaksi
+     // Redirect to the checkout page with the transaction ID
      return redirect()->route('pembelian', $transaction->id);
  }
  
  public function checkout($transactionId)
  {
-     // Dapatkan data transaksi berdasarkan ID yang diberikan
-     $transaction = Transactions::findOrFail($transactionId);
-     // Kirim data transaksi ke view 'pembelian'
+     // Get transaction data based on the provided ID
+     $transaction = History::findOrFail($transactionId); // Assuming History is the model for your history table
+     // Send transaction data to the 'pembelian' view
      return view('pembelian', compact('transaction'));
  }
- 
-
-}
+} 

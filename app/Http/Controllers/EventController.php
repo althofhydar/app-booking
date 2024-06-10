@@ -24,7 +24,7 @@ class EventController extends Controller
             'start_time' => 'required',
             'end_time' => 'required',
             'location' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:1000000',
         ]);
 
         $path = $request->hasFile('image') ? $request->file('image')->store('event_images', 'public') : null;

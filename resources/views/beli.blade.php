@@ -5,6 +5,12 @@
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Transaksi</h1>
 
+    @if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
     <!-- DataTables Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -75,6 +81,7 @@
                 <button type="submit" class="btn btn-primary">
                     <i class="fa fa-check"></i> Checkout
                 </button>
+                
             </form>
         </div>
     </div>
@@ -96,4 +103,5 @@
 
 <!-- Page level custom scripts -->
 <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+
 @endsection

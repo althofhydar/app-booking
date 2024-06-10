@@ -19,7 +19,7 @@
                             <th>Ticket Type</th>
                             <th>Location</th>
                             <th>Price</th>
-                            <th>Tanggal</th>
+                            <th>Date</th>
                             <th>Start</th>
                             <th>End</th>
                             <th>Metode Pembayaran</th>
@@ -69,37 +69,37 @@
                             </div>
                         </div>
 
-                        <!-- Purchase Modal -->
-                        <div class="modal fade" id="purchaseModal{{ $transaction->id }}" tabindex="-1" role="dialog" aria-labelledby="purchaseModalLabel{{ $transaction->id }}" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="purchaseModalLabel{{ $transaction->id }}">Konfirmasi Pembelian</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Apakah anda yakin ingin membeli tiket untuk acara {{ $transaction->event_name }}?</p>
-                                        <p>Jenis Tiket: {{ $transaction->ticket_type }}</p>
-                                        <p>Lokasi: {{ $transaction->location }}</p>
-                                        <p>Harga: {{ $transaction->price }}</p>
-                                        <p>Tanggal: {{ $transaction->tanggal }}</p>
-                                        <p>Waktu Mulai: {{ $transaction->start }}</p>
-                                        <p>Waktu Berakhir: {{ $transaction->end }}</p>
-                                        <p>Metode Pembayaran: {{ $transaction->payment_method }}</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                                        <form action="{{ route('pembelian.confirm', $transaction->id) }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            <button type="submit" class="btn btn-success">Konfirmasi Pembelian</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
+                      <!-- Purchase Modal -->
+<div class="modal fade" id="purchaseModal{{ $transaction->id }}" tabindex="-1" role="dialog" aria-labelledby="purchaseModalLabel{{ $transaction->id }}" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="purchaseModalLabel{{ $transaction->id }}">Konfirmasi Pembelian</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah anda yakin ingin membeli tiket untuk event {{ $transaction->event_name }}?</p>
+                <p>Ticket Type: {{ $transaction->ticket_type }}</p>
+                <p>Location: {{ $transaction->location }}</p>
+                <p>Price: {{ $transaction->price }}</p>
+                <p>Date: {{ $transaction->tanggal }}</p>
+                <p>Start Time: {{ $transaction->start }}</p>
+                <p>End Time: {{ $transaction->end }}</p>
+                <p>Metode Pembayaran: {{ $transaction->payment_method }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                <form action="{{ route('pembelian.confirm', $transaction->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    <button type="submit" class="btn btn-success">Konfirmasi Pembelian</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
                     </tbody>
                    
                 </table>

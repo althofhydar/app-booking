@@ -10,14 +10,20 @@
             margin: 0;
             padding: 0;
             color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9;
         }
         .container {
             width: 80%;
+            max-width: 600px;
             margin: auto;
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 10px;
-            background-color: #f9f9f9;
+            background-color: #fff;
         }
         .header {
             text-align: center;
@@ -31,14 +37,23 @@
             font-size: 14px;
         }
         .details {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
         .details h2 {
             border-bottom: 2px solid #333;
             padding-bottom: 5px;
+            text-align: center;
         }
-        .details p {
-            margin: 5px 0;
+        .details .detail-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin: 15px 0;
+        }
+        .details .detail-item strong {
+            text-align: left;
+        }
+        .details .detail-item span {
+            text-align: right;
         }
         .footer {
             text-align: center;
@@ -55,17 +70,41 @@
         </div>
         <div class="details">
             <h2>Detail Pembelian</h2>
-            <p><strong>Nama Acara:</strong> {{ $receipt['event_name'] }}</p>
-            <p><strong>Jenis Tiket:</strong> {{ $receipt['ticket_type'] }}</p>
-            <p><strong>Lokasi:</strong> {{ $receipt['location'] }}</p>
-            <p><strong>Harga:</strong> Rp {{ number_format($receipt['price'], 0, ',', '.') }}</p>
-            <p><strong>Tanggal:</strong> {{ $receipt['tanggal'] }}</p>
-            <p><strong>Waktu Mulai:</strong> {{ $receipt['start'] }}</p>
-            <p><strong>Waktu Berakhir:</strong> {{ $receipt['end'] }}</p>
-            <p><strong>Metode Pembayaran:</strong> {{ $receipt['payment_method'] }}</p>
+            <div class="detail-item">
+                <strong>Event Name:</strong>
+                <span>{{ $receipt['event_name'] }}</span>
+            </div>
+            <div class="detail-item">
+                <strong>Ticket Type:</strong>
+                <span>{{ $receipt['ticket_type'] }}</span>
+            </div>
+            <div class="detail-item">
+                <strong>Location:</strong>
+                <span>{{ $receipt['location'] }}</span>
+            </div>
+            <div class="detail-item">
+                <strong>Price:</strong>
+                <span>Rp {{ number_format($receipt['price'], 0, ',', '.') }}</span>
+            </div>
+            <div class="detail-item">
+                <strong>Date:</strong>
+                <span>{{ $receipt['tanggal'] }}</span>
+            </div>
+            <div class="detail-item">
+                <strong>Start Time:</strong>
+                <span>{{ $receipt['start'] }}</span>
+            </div>
+            <div class="detail-item">
+                <strong>End Time:</strong>
+                <span>{{ $receipt['end'] }}</span>
+            </div>
+            <div class="detail-item">
+                <strong>Metode Pembayaran:</strong>
+                <span>{{ $receipt['payment_method'] }}</span>
+            </div>
         </div>
         <div class="footer">
-            <p>Ini adalah struk elektronik. Tidak perlu tanda tangan.</p>
+            <p> <a href="{{ route('history') }}" class="btn btn-primary">Lihat History Pembelian</a></p>
         </div>
     </div>
 </body>

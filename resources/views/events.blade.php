@@ -14,10 +14,10 @@
       <input type="text" id="search" placeholder="Search Event..." class="form-control" oninput="liveSearch()">
     </div>
     <div id="cardContainer" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-left">
-      @foreach ($events as $event)
+      @foreach ($acakevent as $event)
         <div class="col mb-5">
           <div class="card h-100">
-            <img class="card-img-top" src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->event_name }}" style="height: 200px; object-fit: cover;">
+            <img class="card-img-top" src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->event_name }}" style="height: 180px; object-fit: cover;">
             <div class="card-body pt-2">
               <div class="text-center">
                 <h5 class="fw-bolder">{{ $event->event_name }}</h5>
@@ -37,10 +37,10 @@
                 </ul>
               </div>
             </div>
-            <div class="card-footer border-top-0 bg-transparent">
-              <div class="text-center">
-                <a class="btn btn-primary mt-auto" href="{{ route('detail', $event->id) }}">Detail</a>
-              </div>
+            <div class="text-center">
+              <a class="btn btn-primary mt-auto" href="{{ route('detail', $event->id) }}">Detail</a>
+            </div>
+            <div class="card-footer border-top-0 bg-transparent"  style="height: 15px;">
             </div>
           </div>
         </div>
@@ -56,7 +56,8 @@
     const searchInput = document.getElementById('search');
     searchInput.addEventListener('input', liveSearch);
 
-    window.eventData = {!! json_encode($events) !!}; // Passing events data to JavaScript
+    window.eventData = {!! json_encode($acakevent) !!}; // Passing events data to JavaScript
+    window.detailRoute = "{{ url('detail') }}";
   });
 
   function liveSearch() {
@@ -80,6 +81,7 @@
         const cardItem = document.createElement('div');
         cardItem.classList.add('col', 'mb-5');
         cardItem.innerHTML = `
+     
           <div class="card h-100">
             <img class="card-img-top" src="{{ asset('storage/') }}/${event.image}" alt="${event.event_name}" style="height: 200px; object-fit: cover;">
             <div class="card-body pt-2">
@@ -101,10 +103,13 @@
                 </ul>
               </div>
             </div>
+            <div class="text-center">
+                <a class="btn btn-primary mt-auto" href="${detailRoute}/${event.id}">Detail</a>
+              </div>
             <div class="card-footer border-top-0 bg-transparent">
-        
-            </div>
+            </div>  
           </div>
+ 
         `;
         cardContainer.appendChild(cardItem);
       });

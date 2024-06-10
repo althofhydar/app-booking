@@ -92,7 +92,7 @@ Route::post( "/forget-password", [ForgetPassword::class, "forgetPasswordPost"])-
 Route::get("/reset-password/{token}", [ForgetPassword::class, "resetPassword"])->name("reset.password");
 Route::post("/reset-password", [ForgetPassword::class, "resetPasswordPost"])->name("reset.password.post");
 
-Route::get('detail/{events:id}', [HomeController::class, 'detail'])->name('detail');
+Route::get('detail/{id}', [HomeController::class, 'detail'])->name('detail');
 Route::get('events', [HomeController::class, 'index'])->name('events');
 Route::get('tickets', [HomeController::class, 'index'])->name('tickets');
 Route::get('beli/{ticket:ticket_type}', [HomeController::class, 'beli'])->name('beli');
@@ -102,8 +102,11 @@ Route::get('/checkout/{id}', [HomeController::class, 'checkout'])->name('checkou
 
 Route::get('pembelian', [PembelianController::class, 'index'])->name('pembelian');
 Route::delete('destroy/{id}',[PembelianController::class, 'destroy'])->name('pembelian.destroy'); // Use DELETE method
-
 Route::post('/pembelian/confirm/{id}', [PembelianController::class, 'confirm'])->name('pembelian.confirm');
+
 Route::get('history', [HistoryController::class, 'index'])->name('history');
+
+
+
 
 
