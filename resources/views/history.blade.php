@@ -18,6 +18,7 @@
                 <table class="table table-bordered" width="100%" cellspacing="0">
                     <thead>
                         <tr>
+                            <th>User Name</th>
                             <th>Event Name</th>
                             <th>Ticket Type</th>
                             <th>Location</th>
@@ -36,51 +37,54 @@
                             <td colspan="9" class="text-center">No data available</td>
                         </tr>
                     @else
-                        @foreach($histories as $history)
-                            <tr>
-                                <td>{{ $history->event_name }}</td>
-                                <td>{{ $history->ticket_type }}</td>
-                                <td>{{ $history->location }}</td>
-                                <td>{{ $history->price }}</td>
-                                <td>{{ $history->tanggal }}</td>
-                                <td>{{ $history->start }}</td>
-                                <td>{{ $history->end }}</td>
-                                <td>{{ $history->payment_method }}</td>
-                                <td>{{ $history->status }}</td> <!-- Add status column -->
-                                <td style="width: 140px;">
-                                    @if ($history->status == 'await')
-                                    <button class="btn btn-secondary" disabled>Cetak</button>
-                                    @elseif ($history->status == 'confirm')
-                                    <button class="btn btn-success print-row" 
-                                            data-id="{{ $history->id }}" 
-                                            data-event_name="{{ $history->event_name }}" 
-                                            data-ticket_type="{{ $history->ticket_type }}" 
-                                            data-location="{{ $history->location }}" 
-                                            data-price="{{ $history->price }}" 
-                                            data-tanggal="{{ $history->tanggal }}" 
-                                            data-start="{{ $history->start }}" 
-                                            data-end="{{ $history->end }}" 
-                                            data-payment_method="{{ $history->payment_method }}">
-                                        Cetak
-                                    </button>
-                                @else
-                                    <button class="btn btn-primary print" 
-                                            data-id="{{ $history->id }}" 
-                                            data-event_name="{{ $history->event_name }}" 
-                                            data-ticket_type="{{ $history->ticket_type }}" 
-                                            data-location="{{ $history->location }}" 
-                                            data-price="{{ $history->price }}" 
-                                            data-tanggal="{{ $history->tanggal }}" 
-                                            data-start="{{ $history->start }}" 
-                                            data-end="{{ $history->end }}" 
-                                            data-payment_method="{{ $history->payment_method }}">
-                                        Cetak
-                                    </button>
-                                @endif
-                                
-                                </td>         
-                            </tr>
-                        @endforeach
+                    @foreach($histories as $history)
+                    <tr>
+                        <td>{{ $history->user->nama }}</td>
+                        <td>{{ $history->event_name }}</td>
+                        <td>{{ $history->ticket_type }}</td>
+                        <td>{{ $history->location }}</td>
+                        <td>{{ $history->price }}</td>
+                        <td>{{ $history->tanggal }}</td>
+                        <td>{{ $history->start }}</td>
+                        <td>{{ $history->end }}</td>
+                        <td>{{ $history->payment_method }}</td>
+                        <td>{{ $history->status }}</td> <!-- Add status column -->
+                        <td style="width: 140px;">
+                            @if ($history->status == 'await')
+                            <button class="btn btn-secondary" disabled>Cetak</button>
+                            @elseif ($history->status == 'confirm')
+                            <button class="btn btn-success print-row" 
+                                    data-id="{{ $history->id }}" 
+                                    data-user_id="{{ $history->user->nama }}" 
+                                    data-event_name="{{ $history->event_name }}" 
+                                    data-ticket_type="{{ $history->ticket_type }}" 
+                                    data-location="{{ $history->location }}" 
+                                    data-price="{{ $history->price }}" 
+                                    data-tanggal="{{ $history->tanggal }}" 
+                                    data-start="{{ $history->start }}" 
+                                    data-end="{{ $history->end }}" 
+                                    data-payment_method="{{ $history->payment_method }}">
+                                Cetak
+                            </button>
+                            @else
+                            <button class="btn btn-primary print" 
+                                    data-id="{{ $history->id }}" 
+                                    data-user_id="{{ $history->user->nama }}" 
+                                    data-event_name="{{ $history->event_name }}" 
+                                    data-ticket_type="{{ $history->ticket_type }}" 
+                                    data-location="{{ $history->location }}" 
+                                    data-price="{{ $history->price }}" 
+                                    data-tanggal="{{ $history->tanggal }}" 
+                                    data-start="{{ $history->start }}" 
+                                    data-end="{{ $history->end }}" 
+                                    data-payment_method="{{ $history->payment_method }}">
+                                Cetak
+                            </button>
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+                    
                         @endif
                     </tbody>
                 </table>
@@ -107,6 +111,7 @@
                 }
 
                 const eventData = {
+                    user_id: this.dataset.user_id,
                     event_name: this.dataset.event_name,
                     ticket_type: this.dataset.ticket_type,
                     location: this.dataset.location,
@@ -162,6 +167,7 @@
         printButtons.forEach(button => {
             button.addEventListener('click', function() {
                 const id = this.getAttribute('data-id');
+                const user_id = this.getAttribute('data-user_id');
                 const event_name = this.getAttribute('data-event_name');
                 const ticket_type = this.getAttribute('data-ticket_type');
                 const location = this.getAttribute('data-location');
@@ -179,6 +185,7 @@
                 // For example, you can open a new window to display the data
                 const printWindow = window.open('', '_blank');
                 printWindow.document.write('<h1>Event Details</h1>');
+                printWindow.document.write(`<p>Event Name: ${user_id}</p>`);
                 printWindow.document.write(`<p>Event Name: ${event_name}</p>`);
                 printWindow.document.write(`<p>Ticket Type: ${ticket_type}</p>`);
                 printWindow.document.write(`<p>Location: ${location}</p>`);

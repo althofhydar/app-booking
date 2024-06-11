@@ -114,7 +114,7 @@
         cardContainer.appendChild(cardItem);
       });
     } else {
-      cardContainer.innerHTML = '<div class="col"><div class="card"><div class="card-body"><h5 class="card-title">No events found</h5></div></div></div>';
+      cardContainer.innerHTML = '<div class="col"><div class="card" ><div class="card-body" style="width: 180px;><h5 class="card-title">No events found</h5></div></div></div>';
     }
   }
 </script>

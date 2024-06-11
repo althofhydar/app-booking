@@ -58,7 +58,7 @@ class PembelianController extends Controller
                     'user_id'=>auth()->id(),
                   
                 ]);
-    dd($history);
+  
                 // Hapus transaksi dari tabel transactions
                 $transaction->delete();
     
