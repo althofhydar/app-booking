@@ -55,9 +55,10 @@ class PembelianController extends Controller
                     'start' => $transaction->start,
                     'end' => $transaction->end,
                     'payment_method' => $transaction->payment_method,
+                    'user_id'=>auth()->id(),
                   
                 ]);
-    
+    dd($history);
                 // Hapus transaksi dari tabel transactions
                 $transaction->delete();
     

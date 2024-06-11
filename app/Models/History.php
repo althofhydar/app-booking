@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
     class History extends Model
     {
-        protected $fillable = ['event_name', 'ticket_type', 'location', 'price', 'tanggal', 'start', 'end', 'payment_method','status'];
+        protected $fillable = ['event_name', 'ticket_type', 'location', 'price', 'tanggal', 'start', 'end', 'payment_method','status','user_id'];
     }
 
